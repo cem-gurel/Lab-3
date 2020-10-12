@@ -16,8 +16,8 @@ public class MainActivity extends AppCompatActivity {
 
     TextView screen;
 
-    float val_one, val_two;
-    boolean add, sub, div, mul;
+    float val_one = 0, val_two=0,temp;
+    boolean add, sub, div, mul, activeOp;
 
 
     @Override
@@ -69,36 +69,84 @@ public class MainActivity extends AppCompatActivity {
         btnPlus.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                val_one = Float.parseFloat(screen.getText().toString());
-                add = true;
-                screen.setText(null);
+                if(val_one ==0) {
+                    val_one = Float.parseFloat(screen.getText().toString());
+                    add = true;
+                    activeOp = true;
+                    screen.setText("");
+                }else {
+                    temp = Float.parseFloat(screen.getText().toString());
+                    val_one = val_one+temp;
+                    if (activeOp == true){
+                        reset();
+                        add = true;
+                    }
+                    temp =0;
+                    screen.setText("");
+                }
             }
         });
 
         btnMinus.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                val_one = Float.parseFloat(screen.getText().toString());
-                sub = true;
-                screen.setText(null);
+                if(val_one ==0) {
+                    val_one = Float.parseFloat(screen.getText().toString());
+                    sub = true;
+                    activeOp = true;
+                    screen.setText("");
+                }else {
+                    temp = Float.parseFloat(screen.getText().toString());
+                    val_one = val_one-temp;
+                    if (activeOp == true){
+                        reset();
+                        sub = true;
+                    }
+                    temp =0;
+                    screen.setText("");
+                }
             }
         });
 
         btnDiv.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                val_one = Float.parseFloat(screen.getText().toString());
-                div = true;
-                screen.setText(null);
+                if(val_one ==0) {
+                    val_one = Float.parseFloat(screen.getText().toString());
+                    div = true;
+                    activeOp = true;
+                    screen.setText("");
+                }else {
+                    temp = Float.parseFloat(screen.getText().toString());
+                    val_one = val_one/temp;
+                    if (activeOp == true){
+                        reset();
+                        div = true;
+                    }
+                    temp =0;
+                    screen.setText("");
+                }
             }
         });
 
         btnMult.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                val_one = Float.parseFloat(screen.getText().toString());
-                mul = true;
-                screen.setText(null);
+                if(val_one ==0) {
+                    val_one = Float.parseFloat(screen.getText().toString());
+                    mul = true;
+                    activeOp = true;
+                    screen.setText("");
+                }else {
+                    temp = Float.parseFloat(screen.getText().toString());
+                    val_one = val_one*temp;
+                    if (activeOp == true){
+                        reset();
+                        mul = true;
+                    }
+                    temp =0;
+                    screen.setText("");
+                }
             }
         });
 
@@ -109,18 +157,22 @@ public class MainActivity extends AppCompatActivity {
                 if(add==true){
                     screen.setText(val_one+val_two+"");
                     add = false;
+                    activeOp = false;
                 }
                 if(sub==true){
                     screen.setText(val_one-val_two+"");
                     sub = false;
+                    activeOp = false;
                 }
                 if(div==true){
                     screen.setText(val_one/val_two+"");
                     div=false;
+                    activeOp = false;
                 }
                 if(mul==true){
                     screen.setText(val_one*val_two+"");
                     mul=false;
+                    activeOp = false;
                 }
 
             }
@@ -129,8 +181,16 @@ public class MainActivity extends AppCompatActivity {
         btnClear.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                val_one = 0;
+                val_two = 0;
                 screen.setText("");
             }
         });
+    }
+    private void reset(){
+        add=false;
+        sub = false;
+        mul = false;
+        div = false;
     }
 }

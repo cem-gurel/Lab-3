@@ -16,6 +16,9 @@ public class MainActivity extends AppCompatActivity {
 
     TextView screen;
 
+    float val_one, val_two;
+    boolean add, sub, div, mul;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 (v)->{screen.setText(screen.getText()+ ".");});
 
         btnDiv.setOnClickListener(
-                (v)->{
-
-                });
+                (v)->{});
 
         btnMult.setOnClickListener(
                 (v)->{});
@@ -63,6 +64,73 @@ public class MainActivity extends AppCompatActivity {
                 (v)->{});
 
         btnClear.setOnClickListener(
-                (v)->{screen.setText("");});
+                (v)->{});
+
+        btnPlus.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                val_one = Float.parseFloat(screen.getText().toString());
+                add = true;
+                screen.setText(null);
+            }
+        });
+
+        btnMinus.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                val_one = Float.parseFloat(screen.getText().toString());
+                sub = true;
+                screen.setText(null);
+            }
+        });
+
+        btnDiv.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                val_one = Float.parseFloat(screen.getText().toString());
+                div = true;
+                screen.setText(null);
+            }
+        });
+
+        btnMult.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                val_one = Float.parseFloat(screen.getText().toString());
+                mul = true;
+                screen.setText(null);
+            }
+        });
+
+        btnCalc.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                val_two = Float.parseFloat(screen.getText().toString());
+                if(add==true){
+                    screen.setText(val_one+val_two+"");
+                    add = false;
+                }
+                if(sub==true){
+                    screen.setText(val_one-val_two+"");
+                    sub = false;
+                }
+                if(div==true){
+                    screen.setText(val_one/val_two+"");
+                    div=false;
+                }
+                if(mul==true){
+                    screen.setText(val_one*val_two+"");
+                    mul=false;
+                }
+
+            }
+        });
+
+        btnClear.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                screen.setText("");
+            }
+        });
     }
 }
